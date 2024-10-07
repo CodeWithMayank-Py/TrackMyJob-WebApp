@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Button } from "components/ui/button"
 import { Input } from "components/ui/input"
 import { Label } from "components/ui/label"
+import { useNavigate } from "react-router-dom"
 import {
   Select,
   SelectContent,
@@ -21,7 +22,8 @@ import {
   DialogTrigger,
 } from "components/ui/dialog"
 import { Separator } from "components/ui/separator"
-import { Sun, Moon, Download, AlertTriangle } from "lucide-react"
+import { Sun, Moon, Download, AlertTriangle, ArrowLeft } from "lucide-react"
+
 
 export default function SettingsPage() {
   const [theme, setTheme] = useState("light")
@@ -64,9 +66,24 @@ export default function SettingsPage() {
     setIsDeleteAccountModalOpen(false)
   }
 
+  const navigate = useNavigate()
+
+  const handleBackClick = () => {
+    navigate("/") // Adjust this path according to your routes to go back to the main page
+  }
+
   return (
     <div className="container mx-auto px-28 py-8 max-w-4xl">
-      <h1 className="text-4xl font-bold mb-8">Settings</h1>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-3xl font-bold">Settings</h1>
+        <Button
+          variant="outline"
+          onClick={handleBackClick}
+          className="h-14 w-14 rounded-full rounded-full border-gray-400 text-gray-600 hover:bg-gray-100 hover:text-gray-800"
+        >
+          <ArrowLeft className="h-10 w-10" />
+        </Button>
+      </div>
 
       <div className="space-y-8">
         {/* Theme Settings */}
