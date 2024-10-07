@@ -1,23 +1,23 @@
-// src/firebaseConfig.ts
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration (replace with your own values)
+// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyAojJcYm3AaPtdShuAh0eLsV-nfh6AsCTM",
+  authDomain: "jobtracker-397c9.firebaseapp.com",
+  projectId: "jobtracker-397c9",
+  storageBucket: "jobtracker-397c9.appspot.com",
+  messagingSenderId: "89736677004",
+  appId: "1:89736677004:web:0a2a843f56ea5cc83c5da9"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 // Initialize Firestore
-export const db = getFirestore(app);
+const db = getFirestore(app);
 
-// Initialize Firebase Auth (if needed)
-export const auth = getAuth(app);
+export { db };
