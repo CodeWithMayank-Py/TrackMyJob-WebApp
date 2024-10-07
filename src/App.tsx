@@ -1,15 +1,22 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import JobApplicationTracker from './job-application-tracker';
-import SettingsPage from './settings-page';
+// src/App.tsx
+import React from "react";
+import { AuthProvider } from "./AuthContext";
+import JobApplicationTracker from "./job-application-tracker";
+import SettingsPage from "./settings-page";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-export default function App() {
+function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<JobApplicationTracker />} />
-        <Route path="/settings" element={<SettingsPage />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<JobApplicationTracker />} />
+          <Route path="/settings" element={<SettingsPage />} />
+          {/* Add your other routes here */}
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
+
+export default App;
