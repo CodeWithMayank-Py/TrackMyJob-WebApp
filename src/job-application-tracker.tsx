@@ -220,16 +220,18 @@ export default function JobApplicationTracker() {
               <Settings className="h-5 w-5" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-56">
+          <DropdownMenuContent align="end" className="w-36">
             <DropdownMenuItem onSelect={() => setIsProfileModalOpen(true)}>
               <User className="mr-2 h-4 w-4" />
               <span>Profile</span>
             </DropdownMenuItem>
+            {/*
             <DropdownMenuItem onSelect={() => navigate('/settings')}>
               <Settings className="mr-2 h-4 w-4" />
               <span>Settings</span>
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator/>
+            */}
             <DropdownMenuItem>
               <LogOut className="mr-2 h-4 w-4" />
               <span>Logout</span>
