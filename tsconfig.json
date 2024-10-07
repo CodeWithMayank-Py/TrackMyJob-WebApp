@@ -15,14 +15,11 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "src",
+    "baseUrl": "src", // Make sure this points to the 'src' folder
     "paths": {
       "@/*": ["*"],
-      "components": ["src/components"],
-      "utils": ["src/lib/utils"],
-      "ui": ["src/components/ui"],
-      "lib": ["src/lib"],
-      "hooks": ["src/hooks"]
+      "@/components/*": ["components/*"], // Ensure this path is correctly mapped
+      "@/lib/*": ["lib/*"]
     }
   },
   "include": ["src"]

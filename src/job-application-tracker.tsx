@@ -1,16 +1,16 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { useState} from "react"
+import { Button } from "components/ui/button";
+import { Input } from "components/ui/input"
+import { Label } from "components/ui/label"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "components/ui/select"
 import {
   Table,
   TableBody,
@@ -18,8 +18,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { Textarea } from "@/components/ui/textarea"
+} from "components/ui/table"
+import { Textarea } from "components/ui/textarea"
 import {
   Dialog,
   DialogContent,
@@ -27,15 +27,15 @@ import {
   DialogTitle,
   DialogTrigger,
   DialogFooter,
-} from "@/components/ui/dialog"
+} from "components/ui/dialog"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Checkbox } from "@/components/ui/checkbox"
+} from "components/ui/dropdown-menu"
+import { Checkbox } from "components/ui/checkbox"
 import { Settings, Plus, Pencil, Trash2, ArrowUpDown, Filter, User, LogOut } from "lucide-react"
 
 type JobApplication = {
@@ -167,7 +167,7 @@ export default function JobApplicationTracker() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 font-sans">
-      <style jsx global>{`
+      <style>{`
         ::-webkit-scrollbar {
           width: 6px;
         }
