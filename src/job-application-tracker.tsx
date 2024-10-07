@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import { Button } from "components/ui/button";
 import { Input } from "components/ui/input";
 import { Label } from "components/ui/label";
@@ -336,6 +337,89 @@ export default function JobApplicationTracker() {
           </div>
         </div>
       </main>
+
+      <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
+        <DialogContent className="bg-[#F3F4F6] rounded-lg">
+          <DialogHeader>
+            <DialogTitle className="text-gray-800">Edit Application</DialogTitle>
+          </DialogHeader>
+          {editingApplication && (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="edit-company" className="text-gray-700">Company</Label>
+                  <Input
+                    id="edit-company"
+                    name="company"
+                    value={editingApplication.company}
+                    onChange={handleInputChange}
+                    required
+                    className="rounded-md focus:border-[#3B82F6] focus:ring-[#3B82F6]"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="edit-position" className="text-gray-700">Position</Label>
+                  <Input
+                    id="edit-position"
+                    name="position"
+                    value={editingApplication.position}
+                    onChange={handleInputChange}
+                    required
+                    className="rounded-md focus:border-[#3B82F6] focus:ring-[#3B82F6]"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="edit-status" className="text-gray-700">Status</Label>
+                  <Select onValueChange={handleStatusChange} value={editingApplication.status}>
+                    <SelectTrigger className="rounded-md focus:border-[#3B82F6] focus:ring-[#3B82F6]">
+                      <SelectValue placeholder="Select status" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Applied">Applied</SelectItem>
+                      <SelectItem value="Interviewing">Interviewing</SelectItem>
+                      <SelectItem value="Offer">Offer</SelectItem>
+                      <SelectItem value="Rejected">Rejected</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="edit-dateApplied" className="text-gray-700">Date Applied</Label>
+                  <Input
+                    id="edit-dateApplied"
+                    name="dateApplied"
+                    type="date"
+                    value={editingApplication.dateApplied}
+                    onChange={handleInputChange}
+                    required
+                    className="rounded-md focus:border-[#3B82F6] focus:ring-[#3B82F6]"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="edit-notes" className="text-gray-700">Notes</Label>
+                  <Textarea
+                    id="edit-notes"
+                    name="notes"
+                    value={editingApplication.notes}
+                    onChange={handleInputChange}
+                    rows={3}
+                    className="rounded-md focus:border-[#3B82F6] focus:ring-[#3B82F6]"
+                  />
+                </div>
+              </div>
+              <div className="flex justify-end space-x-2">
+                <Button type="button" variant="outline" onClick={() => setIsEditDialogOpen(false)}>
+                  Cancel
+                </Button>
+                <Button type="submit" className="bg-[#3B82F6] hover:bg-[#2563EB] text-white">
+                  Save Changes
+                </Button>
+              </div>
+            </form>
+          )}
+        </DialogContent>
+      </Dialog>
+
+
     </div>
   );
 }
