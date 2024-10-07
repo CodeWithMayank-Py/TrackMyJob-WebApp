@@ -27,6 +27,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogFooter,
 } from "components/ui/dialog";
 import {
   DropdownMenu,
@@ -49,6 +50,13 @@ export type JobApplication = {
   notes: string;
 };
 
+export type UserProfile = {
+  firstName: string
+  lastName: string
+  email: string
+  phoneNumber: string
+}
+
 export default function JobApplicationTracker() {
   const [applications, setApplications] = useState<JobApplication[]>([]);
   const [newApplication, setNewApplication] = useState<Omit<JobApplication, "id">>({
@@ -64,6 +72,12 @@ export default function JobApplicationTracker() {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [statusFilters, setStatusFilters] = useState<string[]>([]);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const [userProfile, setUserProfile] = useState<UserProfile>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+  })
 
   // Fetch applications from Firestore
   const fetchApplications = async () => {
@@ -181,6 +195,18 @@ export default function JobApplicationTracker() {
         return "border-gray-400 text-gray-400 hover:bg-gray-400/10";
     }
   };
+
+  const handleProfileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    setUserProfile(prev => ({ ...prev, [name]: value }))
+  }
+
+  const handleProfileSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Here you would typically save the profile to Firebase
+    console.log("Saving profile:", userProfile)
+    setIsProfileModalOpen(false)
+  }
 
   const navigate = useNavigate();
 
@@ -419,6 +445,71 @@ export default function JobApplicationTracker() {
         </DialogContent>
       </Dialog>
 
+      <Dialog open={isProfileModalOpen} onOpenChange={setIsProfileModalOpen}>
+        <DialogContent className="bg-[#F3F4F6] rounded-lg">
+          <DialogHeader>
+            <DialogTitle className="text-gray-800">Edit Profile</DialogTitle>
+          </DialogHeader>
+          <form onSubmit={handleProfileSubmit} className="space-y-4">
+            <div className="grid grid-cols-1 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="firstName" className="text-gray-700">First Name</Label>
+                <Input
+                  id="firstName"
+                  name="firstName"
+                  value={userProfile.firstName}
+                  onChange={handleProfileChange}
+                  required
+                  className="rounded-md focus:border-[#3B82F6] focus:ring-[#3B82F6]"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="lastName" className="text-gray-700">Last Name</Label>
+                <Input
+                  id="lastName"
+                  name="lastName"
+                  value={userProfile.lastName}
+                  onChange={handleProfileChange}
+                  required
+                  className="rounded-md focus:border-[#3B82F6] focus:ring-[#3B82F6]"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-gray-700">Email</Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={userProfile.email}
+                  onChange={handleProfileChange}
+                  required
+                  className="rounded-md focus:border-[#3B82F6] focus:ring-[#3B82F6]"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="phoneNumber" className="text-gray-700">Phone Number</Label>
+                <Input
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  type="tel"
+                  value={userProfile.phoneNumber}
+                  onChange={handleProfileChange}
+                  required
+                  className="rounded-md focus:border-[#3B82F6] focus:ring-[#3B82F6]"
+                />
+              </div>
+            </div>
+            <DialogFooter>
+              <Button type="button" variant="outline" onClick={() => setIsProfileModalOpen(false)}>
+                Cancel
+              </Button>
+              <Button type="submit" className="bg-[#3B82F6] hover:bg-[#2563EB] text-white">
+                Save Changes
+              </Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
 
     </div>
   );
