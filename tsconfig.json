@@ -15,12 +15,14 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "src", // Make sure this points to the 'src' folder
+    "typeRoots": ["./types", "node_modules/@types"],
+    "types": ["babel__core", "babel__generator"],
+    "baseUrl": "src", // Ensure this points to the 'src' directory
     "paths": {
       "@/*": ["*"],
-      "@/components/*": ["components/*"], // Ensure this path is correctly mapped
-      "@/lib/*": ["lib/*"]
+      "@/components/*": ["components/*"], // Maps '@' to 'src/components'
+      "@/lib/*": ["lib/*"] // Maps '@/lib' to 'src/lib'
     }
   },
-  "include": ["src"]
+  "include": ["src", "types"]
 }
