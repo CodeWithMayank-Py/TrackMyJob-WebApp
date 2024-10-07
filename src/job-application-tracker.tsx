@@ -37,6 +37,7 @@ import {
 } from "components/ui/dropdown-menu"
 import { Checkbox } from "components/ui/checkbox"
 import { Settings, Plus, Pencil, Trash2, ArrowUpDown, Filter, User, LogOut } from "lucide-react"
+import { useNavigate } from 'react-router-dom';
 
 type JobApplication = {
   id: number
@@ -165,6 +166,8 @@ export default function JobApplicationTracker() {
     setIsProfileModalOpen(false)
   }
 
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 font-sans">
       <style>{`
@@ -196,7 +199,7 @@ export default function JobApplicationTracker() {
               <User className="mr-2 h-4 w-4" />
               <span>Profile</span>
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => navigate('/settings')}>
               <Settings className="mr-2 h-4 w-4" />
               <span>Settings</span>
             </DropdownMenuItem>
