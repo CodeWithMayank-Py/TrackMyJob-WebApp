@@ -3,7 +3,7 @@ import SignUp from './SignUp'; // Adjust this path based on where your SignUp co
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+    <div className="min-h-screen bg-gray-900 flex flex-col items-center">
       <SignUp />
     </div>
   );
