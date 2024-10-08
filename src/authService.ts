@@ -1,8 +1,7 @@
 import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from './firebaseConfig';
 
-
-
+// Function for signing up with email and password
 export const signUpWithEmail = async (email: string, password: string) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
