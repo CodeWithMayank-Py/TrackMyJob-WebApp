@@ -10,9 +10,7 @@ export default function Component() {
           <div className="w-8 h-8 bg-white rounded-full" />
           <span className="text-xl font-semibold">Acme Inc</span>
         </div>
-        <Link href="/login" className="text-sm hover:underline">
-          Login
-        </Link>
+        <a href="/login" className="text-sm hover:underline">Login</a>
       </header>
       <main className="flex-grow flex items-center justify-center">
         <div className="w-full max-w-md space-y-8 px-4">
@@ -71,14 +69,7 @@ export default function Component() {
           </Button>
           <p className="text-center text-sm text-zinc-400">
             By clicking continue, you agree to our{" "}
-            <Link href="#" className="underline hover:text-white">
-              Terms of Service
-            </Link>{" "}
-            and{" "}
-            <Link href="#" className="underline hover:text-white">
-              Privacy Policy
-            </Link>
-            .
+            <a href="#" className="underline hover:text-white">Terms of Service</a>
           </p>
         </div>
       </main>
