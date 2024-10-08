@@ -17,7 +17,7 @@ export default function Component() {
           <div className="w-8 h-8 bg-white rounded-full" />
           <span className="text-xl font-semibold">Acme Inc</span>
         </div>
-        <a href="/signUp" className="text-sm hover:underline">SignUp</a>
+        <a href="/signup" className="text-sm hover:underline">SignUp</a>
       </header>
       <main className="flex-grow flex items-center justify-center">
         <div className="w-full max-w-md space-y-8 px-4">

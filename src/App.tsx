@@ -1,11 +1,18 @@
-import React from 'react';
-import SignIn from './SignIn'; // Adjust this path based on where your SignUp component is located
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col items-center">
-      <SignIn />
-    </div>
+    <Router>
+      <div className="min-h-screen bg-gray-900 text-white">
+        <Routes>
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="*" element={<SignIn />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
