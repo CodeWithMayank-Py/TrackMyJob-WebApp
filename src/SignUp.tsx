@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button } from 'components/ui/button';
 import { Input } from 'components/ui/input';
 import { Eye, EyeOff } from 'lucide-react';
-import { signUpWithEmail } from './authService';
+import { signUpWithEmail, signUpWithGoogle } from './authService';
 import { useNavigate } from 'react-router-dom';
 import Loader from './Loader';
 
@@ -32,6 +32,18 @@ export default function SignUp() {
       navigate('/demo'); // Navigate to the sign-in page or home page after successful sign-up
     } catch (error) {
       setError('Failed to create account. Please try again.');
+      setIsLoading(false);
+    }
+  };
+
+  const handleGoogleSignUp = async () => {
+    setIsLoading(true);
+    try {
+      await signUpWithGoogle();
+      setIsLoading(false);
+      navigate('/demo');
+    } catch (error) {
+      setError('Failed to sign up with Google. Please try again.');
       setIsLoading(false);
     }
   };
@@ -101,8 +113,7 @@ export default function SignUp() {
               <span className="bg-black px-2 text-zinc-400">Or continue with</span>
             </div>
           </div>
-          <Button className="w-full bg-gray-900 text-white border-zinc-800 hover:bg-gray-700">
-            {/* Add Google Sign-up logic here */}
+          <Button className="w-full bg-gray-900 text-white border-zinc-800 hover:bg-gray-700" onClick={handleGoogleSignUp}>
             Google
           </Button>
           <p className="text-center text-sm text-zinc-400">

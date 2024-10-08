@@ -1,5 +1,5 @@
-import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, getAuth } from 'firebase/auth';
-import { auth } from './firebaseConfig';
+import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { auth, googleProvider } from './firebaseConfig';
 
 
 
@@ -13,15 +13,13 @@ export const signUpWithEmail = async (email: string, password: string) => {
   }
 };
 
+// Function for signing up with Google
 export const signUpWithGoogle = async () => {
   try {
     const result = await signInWithPopup(auth, googleProvider);
-    // The signed-in user info.
-    const user = result.user;
-    console.log("User signed in with Google:", user);
-    return user;
+    return result.user;
   } catch (error) {
-    console.error("Google sign-in error:", error);
+    console.error('Error during Google sign-up:', error);
     throw error;
   }
 };
