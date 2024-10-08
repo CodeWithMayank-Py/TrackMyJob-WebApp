@@ -1,18 +1,23 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { Button } from "components/ui/button"
+import { Input } from "components/ui/input"
+import { Eye, EyeOff } from 'lucide-react';
+import { useState } from 'react';
 
 export default function Component() {
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
   return (
-    <div className="flex flex-col min-h-screen bg-black text-white">
+    <div className="flex flex-col w-full h-full min-h-screen bg-black text-white">
       <header className="flex justify-between items-center p-6">
         <div className="flex items-center space-x-2">
           <div className="w-8 h-8 bg-white rounded-full" />
           <span className="text-xl font-semibold">Acme Inc</span>
         </div>
-        <Link href="/signup" className="text-sm hover:underline">
-          Sign Up
-        </Link>
+        <a href="/signUp" className="text-sm hover:underline">SignUp</a>
       </header>
       <main className="flex-grow flex items-center justify-center">
         <div className="w-full max-w-md space-y-8 px-4">
@@ -26,12 +31,23 @@ export default function Component() {
               placeholder="name@example.com"
               type="email"
             />
+            <div className="relative">
             <Input
-              className="bg-zinc-900 border-zinc-800 text-white placeholder-zinc-400"
-              placeholder="Password"
-              type="password"
+              type={showPassword ? 'text' : 'password'}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              className="bg-zinc-900 border-zinc-800 text-white placeholder-zinc-400 pr-10"
             />
-            <Button className="w-full bg-white text-black hover:bg-zinc-200" type="submit">
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+            >
+              {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+            </button>
+          </div>
+            <Button className="w-full bg-gray-900 text-white hover:bg-gray-700" type="submit">
               Sign In
             </Button>
           </form>
@@ -43,7 +59,7 @@ export default function Component() {
               <span className="bg-black px-2 text-zinc-400">Or continue with</span>
             </div>
           </div>
-          <Button className="w-full bg-zinc-900 text-white border border-zinc-800 hover:bg-zinc-800" variant="outline">
+          <Button className="w-full bg-gray-900 text-white border-zinc-800 hover:bg-gray-700">
             <svg
               className="w-5 h-5 mr-2"
               viewBox="0 0 24 24"
@@ -70,21 +86,8 @@ export default function Component() {
             Google
           </Button>
           <div className="text-center">
-            <Link href="/forgot-password" className="text-sm text-zinc-400 hover:text-white">
-              Forgot your password?
-            </Link>
+          <a href="/forgot-password" className="text-sm text-zinc-400 hover:text-white">Forgot your password?</a>      
           </div>
-          <p className="text-center text-sm text-zinc-400">
-            By clicking continue, you agree to our{" "}
-            <Link href="#" className="underline hover:text-white">
-              Terms of Service
-            </Link>{" "}
-            and{" "}
-            <Link href="#" className="underline hover:text-white">
-              Privacy Policy
-            </Link>
-            .
-          </p>
         </div>
       </main>
     </div>
