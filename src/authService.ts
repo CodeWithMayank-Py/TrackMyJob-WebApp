@@ -1,55 +1,27 @@
-// src/authService.ts
-import { auth, googleProvider } from "./firebaseConfig";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  signOut,
-  UserCredential,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, getAuth } from 'firebase/auth';
+import { auth } from './firebaseConfig';
 
-// Sign up with Email and Password
-export const signUpWithEmail = async (email: string, password: string): Promise<UserCredential | null> => {
+
+
+export const signUpWithEmail = async (email: string, password: string) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    console.log("User signed up:", userCredential.user);
-    return userCredential;
+    return userCredential.user;
   } catch (error) {
-    console.error("Error signing up:", error);
-    return null;
+    console.error('Error during sign-up:', error);
+    throw error;
   }
 };
 
-// Sign in with Email and Password
-export const signInWithEmail = async (email: string, password: string): Promise<UserCredential | null> => {
+export const signUpWithGoogle = async () => {
   try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    console.log("User signed in:", userCredential.user);
-    return userCredential;
+    const result = await signInWithPopup(auth, googleProvider);
+    // The signed-in user info.
+    const user = result.user;
+    console.log("User signed in with Google:", user);
+    return user;
   } catch (error) {
-    console.error("Error signing in:", error);
-    return null;
-  }
-};
-
-// Sign in with Google
-export const signInWithGoogle = async (): Promise<UserCredential | null> => {
-  try {
-    const userCredential = await signInWithPopup(auth, googleProvider);
-    console.log("User signed in with Google:", userCredential.user);
-    return userCredential;
-  } catch (error) {
-    console.error("Error signing in with Google:", error);
-    return null;
-  }
-};
-
-// Sign out user
-export const logout = async (): Promise<void> => {
-  try {
-    await signOut(auth);
-    console.log("User signed out");
-  } catch (error) {
-    console.error("Error signing out:", error);
+    console.error("Google sign-in error:", error);
+    throw error;
   }
 };
