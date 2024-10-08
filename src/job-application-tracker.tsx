@@ -39,7 +39,8 @@ import {
 import { Checkbox } from "components/ui/checkbox";
 import { Settings, Plus, Pencil, Trash2, ArrowUpDown, Filter, User, LogOut } from "lucide-react";
 import { db } from "./firebaseConfig"; // Adjust this path if needed
-import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, where } from "firebase/firestore";
+import {useAuth} from "./AuthContext"
 
 export type JobApplication = {
   id: string;
@@ -48,6 +49,7 @@ export type JobApplication = {
   status: string;
   dateApplied: string;
   notes: string;
+  userId: string;
 };
 
 export type UserProfile = {
@@ -58,6 +60,7 @@ export type UserProfile = {
 }
 
 export default function JobApplicationTracker() {
+  const { user } = useAuth();
   const [applications, setApplications] = useState<JobApplication[]>([]);
   const [newApplication, setNewApplication] = useState<Omit<JobApplication, "id">>({
     company: "",
@@ -65,6 +68,7 @@ export default function JobApplicationTracker() {
     status: "",
     dateApplied: "",
     notes: "",
+    userId: "",
   });
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
@@ -81,8 +85,17 @@ export default function JobApplicationTracker() {
 
   // Fetch applications from Firestore
   const fetchApplications = async () => {
+    if (!user) {
+      console.error("User is not authenticated");
+      return;
+    }
+
     try {
-      const querySnapshot = await getDocs(collection(db, "applications"));
+      const q = query(
+        collection(db, "applications"),
+        where("userId", "==", user.uid) // Fetch only the applications for the logged-in user
+      );
+      const querySnapshot = await getDocs(q);
       const applicationsList = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
@@ -95,7 +108,7 @@ export default function JobApplicationTracker() {
 
   useEffect(() => {
     fetchApplications();
-  }, []);
+  }, [user]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -116,6 +129,11 @@ export default function JobApplicationTracker() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!user) {
+      console.error("User is not authenticated");
+      return;
+    }
+
     if (isEditDialogOpen && editingApplication) {
       try {
         await updateDoc(doc(db, "applications", editingApplication.id), {
@@ -124,6 +142,7 @@ export default function JobApplicationTracker() {
           status: editingApplication.status,
           dateApplied: editingApplication.dateApplied,
           notes: editingApplication.notes,
+          userId: user.uid, // Ensure the userId is included
         });
         console.log("Application updated successfully");
         fetchApplications();
@@ -133,7 +152,10 @@ export default function JobApplicationTracker() {
       }
     } else {
       try {
-        await addDoc(collection(db, "applications"), newApplication);
+        await addDoc(collection(db, "applications"), {
+          ...newApplication,
+          userId: user.uid, // Include the user's UID when adding the application
+        });
         console.log("Application added successfully");
         fetchApplications();
         setIsAddDialogOpen(false);
@@ -141,7 +163,7 @@ export default function JobApplicationTracker() {
         console.error("Error adding application:", error);
       }
     }
-    setNewApplication({ company: "", position: "", status: "", dateApplied: "", notes: "" });
+    setNewApplication({ company: "", position: "", status: "", dateApplied: "", notes: "", userId: "" });
   };
 
   const handleDelete = async (id: string) => {
@@ -208,7 +230,7 @@ export default function JobApplicationTracker() {
     setIsProfileModalOpen(false)
   }
 
-  const navigate = useNavigate();
+  /*const navigate = useNavigate(); */
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 font-sans">
