@@ -52,9 +52,9 @@ export default function SignIn() {
       <header className="flex justify-between items-center p-6">
         <div className="flex items-center space-x-2">
           <div className="w-8 h-8 bg-white rounded-full" />
-          <span className="text-xl font-semibold">Acme Inc</span>
+          <span className="text-xl font-semibold">JobVault</span>
         </div>
-        <a href="/signup" className="text-sm hover:underline">SignUp</a>
+        <a href="/signup" className="text-sm hover:underline">Sign Up</a>
       </header>
       <main className="flex-grow flex items-center justify-center">
         <div className="w-full max-w-md space-y-8 px-4">
@@ -88,7 +88,7 @@ export default function SignIn() {
             </div>
             {error && <p className="text-red-500 text-sm">{error}</p>}
             <Button className="w-full bg-gray-900 text-white hover:bg-gray-700" type="submit">
-              Sign In
+              Login
             </Button>
           </form>
           <div className="relative">

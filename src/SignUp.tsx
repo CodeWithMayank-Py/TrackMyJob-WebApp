@@ -57,10 +57,10 @@ export default function SignUp() {
       <header className="flex justify-between items-center p-6">
         <div className="flex items-center space-x-2">
           <div className="w-8 h-8 bg-white rounded-full" />
-          <span className="text-xl font-semibold">Acme Inc</span>
+          <span className="text-xl font-semibold">JobVault</span>
         </div>
         <a href="/signIn" className="text-sm hover:underline">
-          SignIn
+          Log In
         </a>
       </header>
       <main className="flex-grow flex items-center justify-center">

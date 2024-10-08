@@ -40,7 +40,7 @@ import { Checkbox } from "components/ui/checkbox";
 import { Settings, Plus, Pencil, Trash2, ArrowUpDown, Filter, User, LogOut } from "lucide-react";
 import { db } from "./firebaseConfig"; // Adjust this path if needed
 import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, where } from "firebase/firestore";
-import {useAuth} from "./AuthContext"
+import { useAuth } from "./AuthContext";
 
 export type JobApplication = {
   id: string;
