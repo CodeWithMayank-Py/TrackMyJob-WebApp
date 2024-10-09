@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { onAuthStateChanged, User } from 'firebase/auth';
-import { auth } from './firebaseConfig';  // Update this to your firebase config import
+import { auth } from './firebaseConfig';
 
 interface AuthContextType {
   user: User | null;
@@ -19,20 +19,20 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false); // Stop loading when user state is determined
+      setLoading(false); // Set loading to false once Firebase has determined the user state
     });
 
     return () => unsubscribe();
   }, []);
 
-  return (
-    <AuthContext.Provider value={{ user, loading }}>
-        {children}
-    </AuthContext.Provider>
-);
+  if (loading) {
+    return <div>Loading...</div>; // Show a loading indicator while checking the user's authentication state
+  }
+
+  return <AuthContext.Provider value={{ user, loading }}>{children}</AuthContext.Provider>;
 };

@@ -25,7 +25,6 @@ export const auth = getAuth(app);
 // Initialize Google Auth Provider
 export const googleProvider = new GoogleAuthProvider();
 
-setPersistence(auth, browserLocalPersistence)
-  .catch((error) => {
-    console.error("Error setting persistence:", error);
-  });
+setPersistence(auth, browserLocalPersistence).catch((error) => {
+  console.error("Error setting persistence:", error);
+});
