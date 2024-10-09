@@ -17,11 +17,11 @@
     "jsx": "react-jsx",
     "typeRoots": ["./types", "node_modules/@types"],
     "types": ["babel__core", "babel__generator"],
-    "baseUrl": "src", // Ensure this points to the 'src' directory
+    "baseUrl": "src",
     "paths": {
       "@/*": ["*"],
-      "@/components/*": ["components/*"], // Maps '@' to 'src/components'
-      "@/lib/*": ["lib/*"] // Maps '@/lib' to 'src/lib'
+      "@/components/*": ["components/*"],
+      "@/lib/*": ["lib/*"]
     }
   },
   "include": ["src", "types"]
