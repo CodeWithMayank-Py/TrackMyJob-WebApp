@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, signInWithPopup, signInWithEmailAndPassword, setPersistence, browserLocalPersistence } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithPopup, signInWithEmailAndPassword} from 'firebase/auth';
 import { auth, googleProvider } from './firebaseConfig';
 
 // Function for signing up with email and password
@@ -42,11 +42,3 @@ export const signInWithGoogle = async () => {
     throw error;
   }
 };
-
-setPersistence(auth, browserLocalPersistence)
-  .then(() => {
-    // Now user session will persist even after the browser is closed.
-  })
-  .catch((error) => {
-    console.error("Error setting persistence:", error);
-  });
