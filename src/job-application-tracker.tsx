@@ -89,11 +89,11 @@ export default function JobApplicationTracker() {
       console.error("User is not authenticated");
       return;
     }
-
+  
     try {
       const q = query(
         collection(db, "applications"),
-        where("userId", "==", user.uid) // Fetch only the applications for the logged-in user
+        where("userId", "==", user.uid)
       );
       const querySnapshot = await getDocs(q);
       const applicationsList = querySnapshot.docs.map((doc) => ({
@@ -102,7 +102,7 @@ export default function JobApplicationTracker() {
       })) as JobApplication[];
       setApplications(applicationsList);
     } catch (error) {
-      console.error("Error fetching applications:", error);
+      console.error("Error fetching applications:", (error as Error).message); // Improved error logging
     }
   };
 
@@ -243,15 +243,17 @@ export default function JobApplicationTracker() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-36">
+            {/*
             <DropdownMenuItem onSelect={() => setIsProfileModalOpen(true)}>
               <User className="mr-2 h-4 w-4" />
               <span>Profile</span>
             </DropdownMenuItem>
-            {/*
+            
             <DropdownMenuItem onSelect={() => navigate('/settings')}>
               <Settings className="mr-2 h-4 w-4" />
               <span>Settings</span>
             </DropdownMenuItem>
+            
             <DropdownMenuSeparator/>
             */}
             <DropdownMenuItem>
@@ -477,46 +479,12 @@ export default function JobApplicationTracker() {
           <form onSubmit={handleProfileSubmit} className="space-y-4">
             <div className="grid grid-cols-1 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="firstName" className="text-gray-700">First Name</Label>
-                <Input
-                  id="firstName"
-                  name="firstName"
-                  value={userProfile.firstName}
-                  onChange={handleProfileChange}
-                  required
-                  className="rounded-md focus:border-[#3B82F6] focus:ring-[#3B82F6]"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="lastName" className="text-gray-700">Last Name</Label>
-                <Input
-                  id="lastName"
-                  name="lastName"
-                  value={userProfile.lastName}
-                  onChange={handleProfileChange}
-                  required
-                  className="rounded-md focus:border-[#3B82F6] focus:ring-[#3B82F6]"
-                />
-              </div>
-              <div className="space-y-2">
                 <Label htmlFor="email" className="text-gray-700">Email</Label>
                 <Input
                   id="email"
                   name="email"
                   type="email"
                   value={userProfile.email}
-                  onChange={handleProfileChange}
-                  required
-                  className="rounded-md focus:border-[#3B82F6] focus:ring-[#3B82F6]"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="phoneNumber" className="text-gray-700">Phone Number</Label>
-                <Input
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  type="tel"
-                  value={userProfile.phoneNumber}
                   onChange={handleProfileChange}
                   required
                   className="rounded-md focus:border-[#3B82F6] focus:ring-[#3B82F6]"

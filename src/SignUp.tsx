@@ -29,7 +29,7 @@ export default function SignUp() {
     try {
       await signUpWithEmail(email, password);
       setIsLoading(false);
-      navigate('/demo'); // Navigate to the sign-in page or home page after successful sign-up
+      navigate('/job-application-tracker'); // Navigate to the sign-in page or home page after successful sign-up
     } catch (error) {
       setError('Failed to create account. Please try again.');
       setIsLoading(false);
@@ -41,7 +41,7 @@ export default function SignUp() {
     try {
       await signUpWithGoogle();
       setIsLoading(false);
-      navigate('/demo');
+      navigate('/job-application-tracker');
     } catch (error) {
       setError('Failed to sign up with Google. Please try again.');
       setIsLoading(false);
@@ -59,8 +59,8 @@ export default function SignUp() {
           <div className="w-8 h-8 bg-white rounded-full" />
           <span className="text-xl font-semibold">JobVault</span>
         </div>
-        <a href="/login" className="text-sm hover:underline">
-          Log In
+        <a href="/signin" className="text-sm hover:underline">
+          Sign In
         </a>
       </header>
       <main className="flex-grow flex items-center justify-center">

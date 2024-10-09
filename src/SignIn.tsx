@@ -24,7 +24,7 @@ export default function SignIn() {
     try {
       await signInWithEmail(email, password);
       setIsLoading(false);
-      navigate('/demo'); // Navigate to demo page upon successful sign-in
+      navigate('/job-application-tracker'); // Navigate to demo page upon successful sign-in
     } catch (error) {
       setError('Failed to sign in. Please check your credentials and try again.');
       setIsLoading(false);
@@ -36,7 +36,7 @@ export default function SignIn() {
     try {
       await signInWithGoogle();
       setIsLoading(false);
-      navigate('/demo');
+      navigate('/job-application-tracker');
     } catch (error) {
       setError('Failed to sign in with Google. Please try again.');
       setIsLoading(false);
@@ -88,7 +88,7 @@ export default function SignIn() {
             </div>
             {error && <p className="text-red-500 text-sm">{error}</p>}
             <Button className="w-full bg-gray-900 text-white hover:bg-gray-700" type="submit">
-              Login
+              Sign In
             </Button>
           </form>
           <div className="relative">
