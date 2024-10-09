@@ -5,7 +5,7 @@ export default function DemoPage() {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
-    navigate('/signIn');
+    navigate('/login');
   };
 
   return (
@@ -15,7 +15,7 @@ export default function DemoPage() {
         Your registration was successful. You are now logged in and can explore the features of the application.
       </p>
       <Button className="bg-blue-600 hover:bg-blue-700" onClick={handleGoBack}>
-        Go to Sign In Page
+        Go to Log In Page
       </Button>
     </div>
   );

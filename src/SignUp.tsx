@@ -59,7 +59,7 @@ export default function SignUp() {
           <div className="w-8 h-8 bg-white rounded-full" />
           <span className="text-xl font-semibold">JobVault</span>
         </div>
-        <a href="/signIn" className="text-sm hover:underline">
+        <a href="/login" className="text-sm hover:underline">
           Log In
         </a>
       </header>

@@ -1,22 +1,26 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
+import PrivateRoute from './PrivateRoute';
 import DemoPage from './DemoPage';
+import './index.css';
 import StarryBackground from './landingPage';
 
 function App() {
   return (
-    <Router>
-      <div className="min-h-screen bg-gray-900 text-white">
-        <Routes>
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/demo" element={<DemoPage />} />
-          <Route path="/" element={<StarryBackground />} />
-          <Route path="*" element={<StarryBackground />} />
-        </Routes>
-      </div>
-    </Router>
+    <Routes>
+      <Route path="/login" element={<SignIn />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route
+        path="/demo"
+        element={
+          <PrivateRoute>
+            <DemoPage />
+          </PrivateRoute>
+        }
+      />
+      <Route path="/" element={<StarryBackground />} />
+    </Routes>
   );
 }
 

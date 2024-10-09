@@ -68,7 +68,7 @@ const Header = () => {
     <div className="text-white text-2xl font-bold">JobVault</div>
     <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
       <button className="px-4 py-2 text-white bg-transparent hover:bg-white/10 transition-colors rounded"
-      onClick={() => navigate('/signin')}
+      onClick={() => navigate('/login')}
       >
         Log in
       </button>
