@@ -37,10 +37,12 @@ import {
   DropdownMenuTrigger,
 } from "components/ui/dropdown-menu";
 import { Checkbox } from "components/ui/checkbox";
-import { Settings, Plus, Pencil, Trash2, ArrowUpDown, Filter, User, LogOut } from "lucide-react";
+import { Settings, Plus, Pencil, Trash2, ArrowUpDown, Filter, LogOut } from "lucide-react";
 import { db } from "./firebaseConfig"; // Adjust this path if needed
 import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, where } from "firebase/firestore";
 import { useAuth } from "./AuthContext";
+import { logOut } from './authService';
+import Loader from './Loader';
 
 export type JobApplication = {
   id: string;
@@ -60,6 +62,7 @@ export type UserProfile = {
 }
 
 export default function JobApplicationTracker() {
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const { user } = useAuth();
   const [applications, setApplications] = useState<JobApplication[]>([]);
   const [newApplication, setNewApplication] = useState<Omit<JobApplication, "id">>({
@@ -230,7 +233,25 @@ export default function JobApplicationTracker() {
     setIsProfileModalOpen(false)
   }
 
-  /*const navigate = useNavigate(); */
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    setIsLoggingOut(true); // Show loader
+    try {
+      await logOut(); // Perform logout
+      setTimeout(() => {
+        navigate('/'); // Redirect the user to the landing page after logging out
+        setIsLoggingOut(false); // Hide loader after navigation
+      }, 1000); // Optional delay to ensure the loader is visible
+    } catch (error) {
+      console.error('Error during logout:', error);
+      setIsLoggingOut(false); // Hide loader in case of error
+    }
+  };
+  
+  if (isLoggingOut) {
+    return <Loader />;
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 font-sans">
@@ -256,7 +277,7 @@ export default function JobApplicationTracker() {
             
             <DropdownMenuSeparator/>
             */}
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogout}>
               <LogOut className="mr-2 h-4 w-4" />
               <span>Logout</span>
             </DropdownMenuItem>
