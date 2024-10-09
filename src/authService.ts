@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, signInWithPopup, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithPopup, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from 'firebase/auth';
 import { auth, googleProvider } from './firebaseConfig';
 
 // Function for signing up with email and password
@@ -50,6 +50,16 @@ export const logOut = async () => {
     console.log("User has been logged out");
   } catch (error) {
     console.error("Error logging out:", error);
+    throw error;
+  }
+};
+
+export const resetPassword = async (email: string) => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+    console.log('Password reset email sent successfully');
+  } catch (error) {
+    console.error('Error sending password reset email:', error);
     throw error;
   }
 };
