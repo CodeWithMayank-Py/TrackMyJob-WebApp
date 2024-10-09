@@ -65,7 +65,9 @@ const Header = () => {
 
   return (
     <header className="flex justify-between items-center w-full py-4 px-6 md:px-12">
-    <div className="text-white text-2xl font-bold">JobVault</div>
+    <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+      TrackMyJob
+    </div>
     <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
       <button className="px-4 py-2 text-white bg-transparent hover:bg-white/10 transition-colors rounded"
       onClick={() => navigate('/signin')}

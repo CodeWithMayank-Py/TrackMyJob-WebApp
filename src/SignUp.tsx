@@ -5,6 +5,8 @@ import { Eye, EyeOff } from 'lucide-react';
 import { signUpWithEmail, signUpWithGoogle } from './authService';
 import { useNavigate } from 'react-router-dom';
 import Loader from './Loader';
+import { Link } from 'react-router-dom';
+
 
 export default function SignUp() {
   const [email, setEmail] = useState('');
@@ -56,8 +58,14 @@ export default function SignUp() {
     <div className="flex flex-col w-full h-full min-h-screen bg-black text-white">
       <header className="flex justify-between items-center p-6">
         <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 bg-white rounded-full" />
-          <span className="text-xl font-semibold">JobVault</span>
+        <Link to="/">
+          <span
+            className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500"
+            style={{ fontFamily: 'Montserrat, sans-serif' }}
+          >
+            TrackMyJob
+          </span>
+        </Link>
         </div>
         <a href="/signin" className="text-sm hover:underline">
           Sign In

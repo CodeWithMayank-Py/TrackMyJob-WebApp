@@ -51,8 +51,12 @@ export default function SignIn() {
     <div className="flex flex-col w-full h-full min-h-screen bg-black text-white">
       <header className="flex justify-between items-center p-6">
         <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 bg-white rounded-full" />
-          <span className="text-xl font-semibold">JobVault</span>
+          <span
+            className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500"
+            style={{ fontFamily: 'Montserrat, sans-serif' }}
+          >
+            TrackMyJob
+          </span>
         </div>
         <a href="/signup" className="text-sm hover:underline">Sign Up</a>
       </header>
