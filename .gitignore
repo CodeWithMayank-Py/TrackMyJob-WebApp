@@ -1,5 +1,3 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
 /.pnp
@@ -8,8 +6,10 @@
 # testing
 /coverage
 
-# production
-/build
+# Build outputs
+dist/
+build/
+public/static/
 
 # misc
 .DS_Store
@@ -21,3 +21,17 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Logs
+logs
+
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Vercel config overrides
+.vercel/
