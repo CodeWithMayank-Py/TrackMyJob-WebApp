@@ -2,6 +2,7 @@
   "name": "job-tracker",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@fontsource/pirata-one": "^5.1.0",
     "@headlessui/react": "^2.1.9",
