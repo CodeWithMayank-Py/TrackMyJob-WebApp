@@ -7,12 +7,12 @@ import { getAuth, GoogleAuthProvider, setPersistence, browserLocalPersistence } 
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.VITE_FIREBASE_API_KEY,
-  authDomain: process.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.VITE_FIREBASE_APP_ID,
+  apiKey: "AIzaSyAojJcYm3AaPtdShuAh0eLsV-nfh6AsCTM",
+  authDomain: "jobtracker-397c9.firebaseapp.com",
+  projectId: "jobtracker-397c9",
+  storageBucket: "jobtracker-397c9.appspot.com",
+  messagingSenderId: "89736677004",
+  appId: "1:89736677004:web:0a2a843f56ea5cc83c5da9"
 };
 
 // Initialize Firebase

@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Button } from "components/ui/button";
@@ -43,6 +42,7 @@ import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, where } 
 import { useAuth } from "./AuthContext";
 import { logOut } from './authService';
 import Loader from './Loader';
+import { useCallback } from 'react';
 
 export type JobApplication = {
   id: string;
@@ -87,12 +87,11 @@ export default function JobApplicationTracker() {
   })
 
   // Fetch applications from Firestore
-  const fetchApplications = async () => {
+  const fetchApplications = useCallback(async () => {
     if (!user) {
       console.error("User is not authenticated");
       return;
     }
-  
     try {
       const q = query(
         collection(db, "applications"),
@@ -105,13 +104,13 @@ export default function JobApplicationTracker() {
       })) as JobApplication[];
       setApplications(applicationsList);
     } catch (error) {
-      console.error("Error fetching applications:", (error as Error).message); // Improved error logging
+      console.error("Error fetching applications:", error);
     }
-  };
-
+  }, [user]);
+  
   useEffect(() => {
     fetchApplications();
-  }, [user]);
+  }, [fetchApplications]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
