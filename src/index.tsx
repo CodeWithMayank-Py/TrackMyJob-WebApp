@@ -4,8 +4,6 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from "react-router-dom";
 import App from './App';
 import { AuthProvider } from './AuthContext';
-import '@fontsource/pirata-one';
-
 
 ReactDOM.render(
   <React.StrictMode>
